@@ -4,47 +4,48 @@
 // Created on: Dec 2022
 // This program finds the volume of a cylinder
 
-#include <math.h>
-
+#include <cmath>
 #include <iostream>
+#include <string>
 
-float CylinderVolumeCalculation(int radius, int height) {
-    // This function finds the volume of the cylinder
+float VolumeOfASphere(int radius, int height) {
+    // Calculates a cylinder's volume
+
     float volume;
 
-    // Process
-    volume = M_PI * (radius * radius) * height;
-
-    return volume;
+    if (radius < 0 || height < 0) {
+        return -1;
+    } else {
+        volume = M_PI * pow(radius, 2) * height;
+        return volume;
+    }
 }
 
 int main() {
-    // This function gets the radius and height from the user
-    std::string radius_from_user;
-    std::string height_from_user;
-    int radius;
-    int height;
-    float volume;
+    // Gets input and calls to calculate the volume of the cylinder
 
-    // Input
-    std::cout << "Enter the radius of the cylinder (cm): ";
-    std::cin >> radius_from_user;
-    std::cout << "" << std::endl;
-    std::cout << "Enter the height of the cylinder (cm): ";
-    std::cin >> height_from_user;
-    std::cout << "" << std::endl;
+    int radiusInteger;
+    int heightInteger;
+    float cylinderVolume;
+    std::string radiusText;
+    std::string heightText;
 
     try {
-        radius = std::stoi(radius_from_user);
-        height = std::stoi(height_from_user);
-        // Call function
-        volume = CylinderVolumeCalculation(radius, height);
-        std::cout << "The volume of a cylinder with the radius of "
-                  << radius << " cm and the height of " << height << " cm is "
-                  << volume << " cm³.";
+        std::cout << "Enter radius of a cylinder (cm): ";
+        std::cin >> radiusText;
+        radiusInteger = stoi(radiusText);
+        std::cout << "Enter height of a cylinder (cm): ";
+        std::cin >> heightText;
+        heightInteger = stoi(heightText);
+        cylinderVolume = VolumeOfASphere(radiusInteger, heightInteger);
+        std::cout << std::endl;
+        std::cout << "This cylinder's volume is " << cylinderVolume << " cm³";
+        std::cout << std::endl;
     } catch (std::invalid_argument) {
-        std::cout << "Invalid Input." << std::endl;
+        std::cout << "Invalid input.";
+        std::cout << std::endl;
     }
 
-    std::cout << "\nDone." << std::endl;
+    std::cout << std::endl;
+    std::cout << "Done." << std::endl;
 }
